@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { DollarSign, Utensils } from "lucide-react";
+import { Utensils } from "lucide-react";
 
 export function MonthOrdersAmountCard() {
     return (

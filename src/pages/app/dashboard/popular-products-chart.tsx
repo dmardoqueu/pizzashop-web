@@ -1,7 +1,7 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart } from "lucide-react";
-import { CartesianGrid, Cell, Line, LineChart, Pie, PieChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
-import colors from "tailwindcss/colors"
+import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
+import colors from "tailwindcss/colors";
 
 const data = [
     { product: 'Pepperoni', amount: 34 },
