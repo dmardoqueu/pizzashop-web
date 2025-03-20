@@ -39,17 +39,31 @@ export function StoreProfileDialog() {
         }
     })
 
+    function updateManagedRestaurantCache({ name, description }: StoreProfileSchema) {
+        const cached = queryClient.getQueryData<GetManagedRestaurantResponse>(['managed-restaurant'])
+
+        if (cached) {
+            queryClient.setQueryData<GetManagedRestaurantResponse>(['managed-restaurant'], {
+                ...cached,
+                name,
+                description,
+            })
+        }
+
+        return { cached }
+    }
+
     const { mutateAsync: updateProfileFn } = useMutation({
         mutationFn: updateProfile,
-        onSuccess(_, { name, description }) {
-            const cached = queryClient.getQueryData<GetManagedRestaurantResponse>(['managed-restaurant'])
+        onMutate({ name, description }) {
+            const { cached } = updateManagedRestaurantCache({ name, description })
 
-            if (cached) {
-                queryClient.setQueryData<GetManagedRestaurantResponse>(['managed-restaurant'], {
-                    ...cached,
-                    name,
-                    description,
-                })
+            return { previousProfile: cached }
+        },
+
+        onError(_, __, context) {
+            if (context?.previousProfile) {
+                updateManagedRestaurantCache(context.previousProfile)
             }
         },
     })
@@ -97,7 +111,7 @@ export function StoreProfileDialog() {
                     <DialogClose asChild>
                         <Button type="button" variant="ghost">Cancelar</Button>
                     </DialogClose>
-                    <Button type="submit" variant="sucess" disabled={isSubmitting}> Salvar</Button>
+                    <Button type="submit" variant="sucess" disabled={isSubmitting}>Salvar</Button>
                 </DialogFooter>
             </form>
         </DialogContent>)
