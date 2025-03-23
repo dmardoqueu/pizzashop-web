@@ -10,7 +10,6 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { cancelOrder } from "@/api/cancel-order";
 import { queryClient } from "@/lib/react-query";
-import { GetOrderDetailsResponse } from "@/api/get-order-details";
 import { GetOrdersResponse } from "@/api/get-orders";
 import { approveOrder } from "@/api/approve-order";
 import { deliverOrder } from "@/api/deliver-order";
