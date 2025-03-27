@@ -1,6 +1,6 @@
 import { Header } from '@/components/header'
 import { api } from '@/lib/axios'
-import { AxiosError, isAxiosError } from 'axios'
+import { isAxiosError } from 'axios'
 import { useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
@@ -17,6 +17,8 @@ export function AppLayout() {
 
           if (status === 401 && code === 'UNAUTHORIZED') {
             navigate('/sign-in', { replace: true })
+          } else {
+            throw error
           }
         }
       }
